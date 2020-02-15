@@ -22,5 +22,11 @@ namespace Servicios
         {
             return "Hello World";
         }
+
+        [WebMethod(Description = "Saluda al usuario")]
+        public string Saludar( string nombre )
+        {
+            return "Hola " + nombre;
+        }
     }
 }
