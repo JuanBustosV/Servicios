@@ -69,7 +69,11 @@ namespace Servicios
 
             return frutas;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="frutas"></param>
+        /// <returns></returns>
         [WebMethod]
         public string GuardarFrutas(string[] frutas)
         {
