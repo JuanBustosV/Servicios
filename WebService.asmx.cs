@@ -84,5 +84,22 @@ namespace Servicios
 
             return "Proceso GuardarFrutas realizado con éxito";
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [WebMethod]
+        public List<Equipos> ObtenerEquipos()
+        {
+            List<Equipos> equipos = new List<Equipos>()
+            {
+                new Equipos { Nombre = "Milan", Pais = "Italia" },
+                new Equipos { Nombre = "Real Madrid", Pais = "España" },
+                new Equipos { Nombre = "Granada", Pais = "España" }
+            };
+
+            return equipos;
+        }
     }
 }
