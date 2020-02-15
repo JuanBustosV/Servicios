@@ -69,5 +69,16 @@ namespace Servicios
 
             return frutas;
         }
+
+        [WebMethod]
+        public string GuardarFrutas(string[] frutas)
+        {
+            foreach(string fruta in frutas)
+            {
+                Funciones.Logs("Frutas", fruta);
+            }
+
+            return "Proceso GuardarFrutas realizado con éxito";
+        }
     }
 }

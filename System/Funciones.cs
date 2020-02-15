@@ -8,7 +8,12 @@ namespace Servicios//.system
 {
     public class Funciones
     {
-        public static void Logs(string nombre_archivo, string descripcion)
+        /// <summary>
+        /// Guarda información de log en archivo .txt
+        /// </summary>
+        /// <param name="nombreArchivo">Nombre del archivo</param>
+        /// <param name="descripcion">Descripción/contenido del archivo</param>
+        public static void Logs(string nombreArchivo, string descripcion)
         {
             try
             {
@@ -23,7 +28,7 @@ namespace Servicios//.system
                     Directory.CreateDirectory(directorio);
                 }
 
-                StreamWriter miArchivo = new StreamWriter(directorio + "/" + nombre_archivo + ".txt", true);
+                StreamWriter miArchivo = new StreamWriter(directorio + "/" + nombreArchivo + ".txt", true);
 
                 string cadena = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " >>> " + descripcion;
 
