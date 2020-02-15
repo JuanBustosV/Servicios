@@ -57,5 +57,17 @@ namespace Servicios
         {
             return numero1 + numero2;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [WebMethod]
+        public string[] ObtenerFrutas()
+        {
+            string[] frutas = {"Fresa", "Limón", "Melón"};
+
+            return frutas;
+        }
     }
 }
