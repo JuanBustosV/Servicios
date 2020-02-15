@@ -30,7 +30,7 @@ namespace Servicios
         [WebMethod(Description = "Saluda al usuario")]
         public string Saludar( string nombre )
         {
-            return "Hola " + nombre;
+            return "\nHola " + nombre + "\n";
         }
 
         /// <summary>
@@ -44,6 +44,18 @@ namespace Servicios
             Funciones.Logs("LogServicio", mensaje);
 
             return "OK";
+        }
+
+        /// <summary>
+        /// Suma dos números
+        /// </summary>
+        /// <param name="numero1">Primer número</param>
+        /// <param name="numero2">Segundo número</param>
+        /// <returns>Suma del primer más el segundo número</returns>
+        [WebMethod]
+        public int Sumar(int numero1, int numero2)
+        {
+            return numero1 + numero2;
         }
     }
 }
