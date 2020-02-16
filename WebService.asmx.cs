@@ -85,6 +85,8 @@ namespace Servicios
             return "Proceso GuardarFrutas realizado con éxito";
         }
 
+        // CURSO: 21. Método que retorna un vector tipo Clase
+
         /// <summary>
         /// 
         /// </summary>
@@ -100,6 +102,23 @@ namespace Servicios
             };
 
             return equipos;
+        }
+
+        // CURSO: 23. Método que recibe un vector tipo Clase
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [WebMethod]
+        public string GuardarEquipos(Equipos[] equipos)
+        {
+            foreach (Equipos equipo in equipos)
+            {
+                Funciones.Logs("Equipos", equipo.Nombre + " - " + equipo.Pais);
+            }
+
+            return "Proceso GuardarEquipos realizado con éxito";
         }
     }
 }
