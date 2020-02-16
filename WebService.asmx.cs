@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -157,5 +158,39 @@ namespace Servicios
 
             return "Proceso GuardarXML realizado con éxito";
         }
+
+        // CURSO: 30. Método que retorna un texto con formato JSON
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [WebMethod]
+        public string RetornarJson()
+        {
+            dynamic json = new Dictionary<string, dynamic>();
+
+            json.Add("deporte", "Fútbol");
+
+            // Emula formato JSON clave, valor
+            List<Dictionary<string, string>> equipos = new List<Dictionary<string, string>>();
+
+            Dictionary<string, string> equipo1 = new Dictionary<string, string>();
+            equipo1.Add("Nombre", "Manchester United");
+            equipo1.Add("Pais", "Inglaterra");
+
+            equipos.Add(equipo1);
+
+            Dictionary<string, string> equipo2 = new Dictionary<string, string>();
+            equipo2.Add("Nombre", "Betis");
+            equipo2.Add("Pais", "España");
+
+            equipos.Add(equipo2);
+
+            json.Add("equipos", equipos);
+
+            return JsonConvert.SerializeObject(json);
+        }
+
     }
 }
