@@ -140,6 +140,21 @@ namespace Servicios
 
             Funciones.Logs("XML", "Deporte: " + deporte + "; Equipos: ");
 
+            // CURSO: 27. Método que recibe un texto con formato XML - P2
+
+            XmlNodeList nodeEquipos = dataXML.GetElementsByTagName("equipos");
+
+            // Obtenemos todos los elementos "equipo" del nodo equipos
+            XmlNodeList equipos = ((XmlElement)nodeEquipos[0]).GetElementsByTagName("equipo");
+
+            foreach (XmlElement equipo in equipos)
+            {
+                string nombre = equipo.GetElementsByTagName("nombre")[0].InnerText;
+                string pais = equipo.GetElementsByTagName("pais")[0].InnerText;
+
+                Funciones.Logs("XML", nombre + " - " + pais);
+            }
+
             return "Proceso GuardarXML realizado con éxito";
         }
     }
