@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using System.Xml;
 
 namespace Servicios
 {
@@ -119,6 +120,27 @@ namespace Servicios
             }
 
             return "Proceso GuardarEquipos realizado con éxito";
+        }
+
+        // CURSO: 26. Método que recibe un texto con formato XML - P1
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [WebMethod]
+        public string GuardarXML(string xml)
+        {
+            XmlDocument dataXML = new XmlDocument();
+
+            dataXML.LoadXml(xml);
+
+            XmlNode documento = dataXML.SelectSingleNode("documento");
+
+            string deporte = documento["deporte"].InnerText;
+
+            Funciones.Logs("XML", "Deporte: " + deporte + "; Equipos: ");
+
+            return "Proceso GuardarXML realizado con éxito";
         }
     }
 }
