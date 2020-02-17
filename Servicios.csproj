@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="system\DataJson.cs" />
     <Compile Include="system\Equipos.cs" />
     <Compile Include="system\Funciones.cs" />
     <Compile Include="WebService.asmx.cs">
