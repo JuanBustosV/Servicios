@@ -6,6 +6,7 @@ using System.Web;
 
 namespace Servicios//.system
 {
+    // CURSO: 40. Clase DatosEnlace
     public class DatosEnlace
     {
         public static string ipBaseDatos = ConfigurationManager.AppSettings["ipBaseDatos"];

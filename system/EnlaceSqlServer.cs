@@ -19,9 +19,39 @@ namespace Servicios//.system
         {
             bool estado = false;
 
+            // CURSO: 43. Conexión a SQL Server - P3
             try
             {
+                if (conexion == null)
+                {
+                    conexion = new SqlConnection();
+                    conexion.ConnectionString = "Data Source=" + DatosEnlace.ipBaseDatos +
+                                "; Initial Catalog=" + DatosEnlace.nombreBaseDatos +
+                                "; User ID=" + DatosEnlace.usuarioBaseDatos +
+                                "; Password=" + DatosEnlace.passwordBaseDatos +
+                                "; MultipleActiveResultSets=True";
 
+                    System.Threading.Thread.Sleep(750);
+                }
+
+                if (conexion.State == System.Data.ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+
+                if (conexion.State == System.Data.ConnectionState.Broken)
+                {
+                    conexion.Close();
+                    conexion.Open();
+                }
+
+                if (conexion.State == System.Data.ConnectionState.Connecting)
+                {
+                    while (conexion.State == System.Data.ConnectionState.Connecting)
+                        System.Threading.Thread.Sleep(500);
+                }
+
+                estado = true;
             }
             catch (Exception ex)
             {
