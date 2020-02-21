@@ -273,7 +273,36 @@ namespace Servicios
             return JsonConvert.SerializeObject(json);
         }
 
-        // CURSO:
+        // CURSO: 51. Método para retornar un registro de la base de datos - P1
+        [WebMethod]
+        public Producto ObtenerProducto(int idproducto)
+        {
+            Producto producto = new Producto
+            {
+                Idproduct = 0,
+                Nombre = "",
+                Precio = 0,
+                Stock = 0
+            };
+
+            if (!EnlaceSqlServer.ConectarSqlServer())
+            {
+                return producto;
+            }
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Funciones.Logs("ObtenerProducto", ex.Message);
+                Funciones.Logs("ObtenerProducto_DEBUG", ex.StackTrace);
+            }
+
+            return producto;
+        }
+
         // CURSO:
         // CURSO:
         // CURSO:
