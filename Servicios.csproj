@@ -80,6 +80,7 @@
     <Compile Include="system\EnlaceSqlServer.cs" />
     <Compile Include="system\Equipos.cs" />
     <Compile Include="system\Funciones.cs" />
+    <Compile Include="system\Producto.cs" />
     <Compile Include="WebService.asmx.cs">
       <DependentUpon>WebService.asmx</DependentUpon>
       <SubType>Component</SubType>
