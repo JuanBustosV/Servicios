@@ -14,5 +14,23 @@ namespace Servicios//.system
         {
             get { return EnlaceSqlServer.conexion; }
         }
+
+        public static bool ConectarSqlServer()
+        {
+            bool estado = false;
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                estado = false;
+                Funciones.Logs("ENLACESQLSERVER", "Problemas al abrir la conexión; Captura error: " + ex.Message);
+                Funciones.Logs("ENLACESQLSERVER_debug", ex.StackTrace);
+            }
+
+            return estado;
+        }
     }
 }
