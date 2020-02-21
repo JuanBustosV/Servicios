@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -225,10 +227,18 @@ namespace Servicios
             {
                 return "No conecta a BD!";
             }
-
+            // CURSO: 45. Método que retorna una tabla de la base en formato JSON - P2
             try
             {
+                SqlCommand com = new SqlCommand("SELECT * FROM productos", EnlaceSqlServer.Conexion);
+                com.CommandType = CommandType.Text;
+                com.CommandTimeout = DatosEnlace.timeOutSqlServer;
 
+                SqlDataReader record = com.ExecuteReader();
+                if (record.HasRows)
+                {
+
+                }
             }
             catch (Exception ex)
             {
