@@ -215,7 +215,30 @@ namespace Servicios
             return "Proceso GuardarJson realizado con éxito";
         }
 
-        // CURSO:
+        // CURSO: 44. Método que retorna una tabla de la base en formato JSON - P1
+        [WebMethod]
+        public string ObtenerProductos()
+        {
+            List<Dictionary<string, string>> json = new List<Dictionary<string, string>>();
+
+            if (!EnlaceSqlServer.ConectarSqlServer())
+            {
+                return "No conecta a BD!";
+            }
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Funciones.Logs("ObtenerProductos", ex.Message);
+                Funciones.Logs("ObtenerProductos_DEBUG", ex.StackTrace);
+            }
+
+            return JsonConvert.SerializeObject(json);
+        }
+
         // CURSO:
         // CURSO:
         // CURSO:
