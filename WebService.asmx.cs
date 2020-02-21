@@ -32,7 +32,7 @@ namespace Servicios
         [WebMethod(Description = "Saluda al usuario")]
         public string Saludar( string nombre )
         {
-            return "\nHola " + nombre + "\n";
+            return "Hola " + nombre + "\n";
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Servicios
         {
             Funciones.Logs("LogServicio", mensaje);
 
-            return "OK";
+            return "GuardarLog: OK";
         }
 
         /// <summary>
@@ -192,6 +192,8 @@ namespace Servicios
             return JsonConvert.SerializeObject(json);
         }
 
+        // CURSO: 33. Método que recibe un texto con formato JSON
+
         /// <summary>
         /// 
         /// </summary>
@@ -200,6 +202,7 @@ namespace Servicios
         [WebMethod]
         public string GuardarJson(string json)
         {
+            //{"deporte":"Fútbol","equipos":[{"Nombre":"Manchester United","Pais":"Inglaterra"},{"Nombre":"Betis","Pais":"España"}]}
             var data_json = JsonConvert.DeserializeObject<DataJson>(json);
 
             Funciones.Logs("JSON", "Deporte: " + data_json.deporte + "; Equipos: ");
@@ -212,5 +215,19 @@ namespace Servicios
             return "Proceso GuardarJson realizado con éxito";
         }
 
+        // CURSO:
+        // CURSO:
+        // CURSO:
+        // CURSO:
+        // CURSO:
+        // CURSO:
+        // CURSO:
+        // CURSO:
+        // CURSO:
+        // CURSO:
+        // CURSO:
+        // CURSO:
+        // CURSO:
+        // CURSO:
     }
 }

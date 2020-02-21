@@ -14,4 +14,6 @@ namespace Servicios
         public string deporte { get; set; }
         public List<Equipos> equipos { get; set; }
     }
+
+    //{"deporte":"Fútbol","equipos":[{"Nombre":"Manchester United","Pais":"Inglaterra"},{"Nombre":"Betis","Pais":"España"}]}
 }
