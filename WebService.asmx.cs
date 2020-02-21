@@ -192,5 +192,25 @@ namespace Servicios
             return JsonConvert.SerializeObject(json);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string GuardarJson(string json)
+        {
+            var data_json = JsonConvert.DeserializeObject<DataJson>(json);
+
+            Funciones.Logs("JSON", "Deporte: " + data_json.deporte + "; Equipos: ");
+
+            foreach (var equipo in data_json.equipos)
+            {
+                Funciones.Logs("JSON", "Deporte: " + equipo.Nombre + " - " + equipo.Pais);
+            }
+
+            return "Proceso GuardarJson realizado con éxito";
+        }
+
     }
 }
