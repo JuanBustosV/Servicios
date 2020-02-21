@@ -222,28 +222,52 @@ namespace Servicios
         public string ObtenerProductos()
         {
             List<Dictionary<string, string>> json = new List<Dictionary<string, string>>();
+            SqlDataReader record = null;
+            SqlCommand com = null;
 
             if (!EnlaceSqlServer.ConectarSqlServer())
             {
-                return "No conecta a BD!";
+                return "{\"ERROR\": \"No conecta a BD!\"}";
             }
             // CURSO: 45. Método que retorna una tabla de la base en formato JSON - P2
             try
             {
-                SqlCommand com = new SqlCommand("SELECT * FROM productos", EnlaceSqlServer.Conexion);
-                com.CommandType = CommandType.Text;
-                com.CommandTimeout = DatosEnlace.timeOutSqlServer;
+                com = new SqlCommand("SELECT * FROM productos", EnlaceSqlServer.Conexion)
+                {
+                    CommandType = CommandType.Text,
+                    CommandTimeout = DatosEnlace.timeOutSqlServer
+                };
 
-                SqlDataReader record = com.ExecuteReader();
+                record = com.ExecuteReader();
                 if (record.HasRows)
                 {
+                    // CURSO: 46. Método que retorna una tabla de la base en formato JSON - P3
+                    Dictionary<string, string> row;
 
-                }
+                    while (record.Read())
+                    {
+                        row = new Dictionary<string, string>();
+
+                        for (int f = 0; f < record.FieldCount; f++)
+                        {
+                            row.Add(record.GetName(f), record.GetValue(f).ToString());
+                        }
+
+                        json.Add(row);
+                    }
+                }                
             }
             catch (Exception ex)
             {
                 Funciones.Logs("ObtenerProductos", ex.Message);
                 Funciones.Logs("ObtenerProductos_DEBUG", ex.StackTrace);
+            }
+            finally
+            {
+                record.Close();
+                record.Dispose();
+                record = null;
+                com.Dispose();
             }
 
             return JsonConvert.SerializeObject(json);

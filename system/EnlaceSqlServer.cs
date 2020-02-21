@@ -25,11 +25,28 @@ namespace Servicios//.system
                 if (conexion == null)
                 {
                     conexion = new SqlConnection();
-                    conexion.ConnectionString = "Data Source=" + DatosEnlace.ipBaseDatos +
-                                "; Initial Catalog=" + DatosEnlace.nombreBaseDatos +
-                                "; User ID=" + DatosEnlace.usuarioBaseDatos +
-                                "; Password=" + DatosEnlace.passwordBaseDatos +
-                                "; MultipleActiveResultSets=True";
+                    /*
+                     *  Cadena de conexión de SQL Server 2019 en Somee.com:
+                     * 
+                     *      workstation id=serviciosx.mssql.somee.com;packet size=4096;user id=JuanBustos_SQLLogin_1;pwd=pjcxkxnor3;
+                     *      data source=serviciosx.mssql.somee.com;persist security info=False;initial catalog=serviciosx
+                     * 
+                     * 
+                     */
+
+                    // Cadena usada para el curso, distinto a mi prueba en somee.com
+                    //conexion.ConnectionString = "Data Source=" + DatosEnlace.ipBaseDatos +
+                    //            "; Initial Catalog=" + DatosEnlace.nombreBaseDatos +
+                    //            "; User ID=" + DatosEnlace.usuarioBaseDatos +
+                    //            "; Password=" + DatosEnlace.passwordBaseDatos +
+                    //            "; MultipleActiveResultSets=True";
+                    conexion.ConnectionString = "workstation id=" + DatosEnlace.ipBaseDatos +
+                        ";packet size=4096;user id=" + DatosEnlace.usuarioBaseDatos +
+                        ";pwd=" + DatosEnlace.passwordBaseDatos +
+                        ";data source=" + DatosEnlace.ipBaseDatos +
+                        ";persist security info=False;initial catalog=" + DatosEnlace.nombreBaseDatos;
+
+                    //Funciones.Logs("cadena_conexión", conexion.ConnectionString);
 
                     System.Threading.Thread.Sleep(750);
                 }
