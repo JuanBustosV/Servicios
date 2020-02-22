@@ -266,7 +266,7 @@ namespace Servicios
             {
                 record.Close();
                 record.Dispose();
-                record = null;
+                //record = null;
                 com.Dispose();
             }
 
@@ -292,7 +292,21 @@ namespace Servicios
 
             try
             {
+                // CURSO: 52. Método para retornar un registro de la base de datos - P2
+                SqlCommand com = new SqlCommand("SELECT TOP 1 * FROM productos WHERE idproducto = " + idproducto, EnlaceSqlServer.Conexion)
+                {
+                    CommandType = CommandType.Text,
+                    CommandTimeout = DatosEnlace.timeOutSqlServer
+                };
 
+                SqlDataReader record = com.ExecuteReader();
+                if (record.HasRows && record.Read())
+                {
+                    producto.Idproduct = int.Parse(record.GetValue(0).ToString());
+                    producto.Nombre = record.GetValue(1).ToString();
+                    producto.Precio = double.Parse(record.GetValue(2).ToString());
+                    producto.Stock = int.Parse(record.GetValue(3).ToString());
+                }
             }
             catch (Exception ex)
             {
