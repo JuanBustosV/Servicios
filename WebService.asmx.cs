@@ -406,6 +406,7 @@ namespace Servicios
         public int GuardarProducto(Producto producto)
         {
             int idproducto = 0;
+            SqlCommand com = null;
 
             if (!EnlaceSqlServer.ConectarSqlServer())
             {
@@ -414,7 +415,10 @@ namespace Servicios
 
             try
             {
-
+                // CURSO: 60. Método para insertar un registro de la base de datos - P2
+                com = new SqlCommand("INSERT INTO productos ( nombre, precio, stock ) " +
+                    " VALUES ( @Nombre, @Precio, @Stock ) " +
+                    " ; SELECT CAST(scope_identity() AS int) ", EnlaceSqlServer.Conexion);
             }
             catch (Exception ex)
             {
