@@ -279,11 +279,14 @@ namespace Servicios
         {
             Producto producto = new Producto
             {
+                // Devolverá todo a 0 o "" si no encuentra producto en la consulta SQL
                 Idproduct = 0,
                 Nombre = "",
                 Precio = 0,
                 Stock = 0
             };
+            SqlCommand com = null;
+            SqlDataReader record = null;
 
             if (!EnlaceSqlServer.ConectarSqlServer())
             {
@@ -293,25 +296,39 @@ namespace Servicios
             try
             {
                 // CURSO: 52. Método para retornar un registro de la base de datos - P2
-                SqlCommand com = new SqlCommand("SELECT TOP 1 * FROM productos WHERE idproducto = " + idproducto, EnlaceSqlServer.Conexion)
+                com = new SqlCommand("SELECT TOP 1 * FROM productos WHERE idproducto = " + idproducto, EnlaceSqlServer.Conexion)
                 {
                     CommandType = CommandType.Text,
                     CommandTimeout = DatosEnlace.timeOutSqlServer
                 };
 
-                SqlDataReader record = com.ExecuteReader();
+                record = com.ExecuteReader();
                 if (record.HasRows && record.Read())
                 {
                     producto.Idproduct = int.Parse(record.GetValue(0).ToString());
                     producto.Nombre = record.GetValue(1).ToString();
                     producto.Precio = double.Parse(record.GetValue(2).ToString());
                     producto.Stock = int.Parse(record.GetValue(3).ToString());
-                }
+                }                
             }
             catch (Exception ex)
             {
                 Funciones.Logs("ObtenerProducto", ex.Message);
                 Funciones.Logs("ObtenerProducto_DEBUG", ex.StackTrace);
+            }
+            finally // CURSO: 53. Método para retornar un registro de la base de datos - P3
+            {
+                if (record != null)
+                {
+                    record.Close();
+                    record.Dispose();
+                    //record = null;
+                }
+
+                if (com != null)
+                {
+                    com.Dispose();
+                }                
             }
 
             return producto;
