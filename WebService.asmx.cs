@@ -339,7 +339,7 @@ namespace Servicios
         /// Actualiza un registro completo de un producto en BD
         /// </summary>
         /// <param name="producto"></param>
-        /// <returns>string vacío si no se establece conexión</returns>
+        /// <returns>mensaje sobre la actualización</returns>
         [WebMethod]
         public string ActualizarProducto(Producto producto)
         {
@@ -348,7 +348,7 @@ namespace Servicios
 
             if (!EnlaceSqlServer.ConectarSqlServer())
             {
-                return string.Empty;
+                return "ActualizarProducto: Error al conectar con SQL Server 2019";
             }
 
             try
@@ -365,10 +365,10 @@ namespace Servicios
                 com.Parameters.AddWithValue("@Nombre", producto.Nombre);
                 com.Parameters.AddWithValue("@Precio", producto.Precio);
                 com.Parameters.AddWithValue("@Stock", producto.Stock);
-                com.Parameters.AddWithValue("@IdProdcuto", producto.Idproducto);
+                com.Parameters.AddWithValue("@IdProducto", producto.Idproducto);
 
                 // ejecutar consulta SQL
-                int updates = com.ExecuteNonQuery();
+                int updates = com.ExecuteNonQuery(); // porque hacemos UPDATE
                 // solo debe actualizar un registro, idproducto es clave primaria
                 if (updates == 1)
                 {
