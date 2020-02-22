@@ -334,7 +334,40 @@ namespace Servicios
             return producto;
         }
 
-        // CURSO:
+        // CURSO: 55. Método para actualizar un registro de la base de datos - P1
+        /// <summary>
+        /// Actualiza un registro completo de un producto en BD
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <returns>string vacío si no se establece conexión</returns>
+        [WebMethod]
+        public string ActualizarProducto(Producto producto)
+        {
+            string result = "";
+
+            if (!EnlaceSqlServer.ConectarSqlServer())
+            {
+                return string.Empty;
+            }
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Funciones.Logs("ActualizarProducto", ex.Message);
+                Funciones.Logs("ActualizarProducto_DEBUG", ex.StackTrace);
+            }
+            finally
+            {
+
+            }
+
+            return result;
+        }
+
+
         // CURSO:
         // CURSO:
         // CURSO:
