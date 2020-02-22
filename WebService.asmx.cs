@@ -280,7 +280,7 @@ namespace Servicios
             Producto producto = new Producto
             {
                 // Devolverá todo a 0 o "" si no encuentra producto en la consulta SQL
-                Idproduct = 0,
+                Idproducto = 0,
                 Nombre = "",
                 Precio = 0,
                 Stock = 0
@@ -305,7 +305,7 @@ namespace Servicios
                 record = com.ExecuteReader();
                 if (record.HasRows && record.Read())
                 {
-                    producto.Idproduct = int.Parse(record.GetValue(0).ToString());
+                    producto.Idproducto = int.Parse(record.GetValue(0).ToString());
                     producto.Nombre = record.GetValue(1).ToString();
                     producto.Precio = double.Parse(record.GetValue(2).ToString());
                     producto.Stock = int.Parse(record.GetValue(3).ToString());
@@ -344,6 +344,7 @@ namespace Servicios
         public string ActualizarProducto(Producto producto)
         {
             string result = "";
+            SqlCommand com = null;
 
             if (!EnlaceSqlServer.ConectarSqlServer())
             {
@@ -352,7 +353,31 @@ namespace Servicios
 
             try
             {
+                // CURSO: 56. Método para actualizar un registro de la base de datos - P2
+                com = new SqlCommand("UPDATE productos SET"+
+                    " nombre = @Nombre, "+
+                    " precio = @Precio, "+
+                    " stock = @Stock "+
+                    " WHERE "+
+                    " idproducto = @IdProducto ", EnlaceSqlServer.Conexion);
 
+                // Establecer los parámetros de la consulta UPDATE 
+                com.Parameters.AddWithValue("@Nombre", producto.Nombre);
+                com.Parameters.AddWithValue("@Precio", producto.Precio);
+                com.Parameters.AddWithValue("@Stock", producto.Stock);
+                com.Parameters.AddWithValue("@IdProdcuto", producto.Idproducto);
+
+                // ejecutar consulta SQL
+                int updates = com.ExecuteNonQuery();
+                // solo debe actualizar un registro, idproducto es clave primaria
+                if (updates == 1)
+                {
+                    result = "ActualizarProducto: Producto actualizado con éxito";
+                }
+                else
+                {
+                    result = "ActualizarProducto: Error al actualizar el producto";
+                }
             }
             catch (Exception ex)
             {
@@ -361,7 +386,10 @@ namespace Servicios
             }
             finally
             {
-
+                if (com != null)
+                {
+                    com.Dispose();
+                }
             }
 
             return result;

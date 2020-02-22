@@ -8,7 +8,7 @@ namespace Servicios//.system
     public class Producto
     {
         // CURSO: 50. Clase Producto
-        public int Idproduct { get; set; }
+        public int Idproducto { get; set; }
 
         public string Nombre { get; set; }
 
