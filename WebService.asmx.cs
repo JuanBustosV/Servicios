@@ -419,11 +419,25 @@ namespace Servicios
                 com = new SqlCommand("INSERT INTO productos ( nombre, precio, stock ) " +
                     " VALUES ( @Nombre, @Precio, @Stock ) " +
                     " ; SELECT CAST(scope_identity() AS int) ", EnlaceSqlServer.Conexion);
+
+                // CURSO: 61. Método para insertar un registro de la base de datos - P3
+                com.Parameters.AddWithValue("@Nombre", producto.Nombre);
+                com.Parameters.AddWithValue("@Precio", producto.Precio);
+                com.Parameters.AddWithValue("@Stock", producto.Stock);
+
+                idproducto = (int)com.ExecuteScalar(); // coger solo el id
             }
             catch (Exception ex)
             {
                 Funciones.Logs("GuardarProducto", ex.Message);
                 Funciones.Logs("GuardarProducto_DEBUG", ex.StackTrace);
+            }
+            finally
+            {
+                if (com != null)
+                {
+                    com.Dispose();
+                }
             }
 
             return idproducto;
