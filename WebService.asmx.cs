@@ -34,7 +34,7 @@ namespace Servicios
         [WebMethod(Description = "Saluda al usuario")]
         public string Saludar( string nombre )
         {
-            return "Hola " + nombre + "\n";
+            return "Hola " + nombre;
         }
 
         /// <summary>
@@ -396,7 +396,35 @@ namespace Servicios
         }
 
 
-        // CURSO:
+        // CURSO: 59. Método para insertar un registro de la base de datos - P1
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public int GuardarProducto(Producto producto)
+        {
+            int idproducto = 0;
+
+            if (!EnlaceSqlServer.ConectarSqlServer())
+            {
+                return 0;
+            }
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Funciones.Logs("GuardarProducto", ex.Message);
+                Funciones.Logs("GuardarProducto_DEBUG", ex.StackTrace);
+            }
+
+            return idproducto;
+        }
+
         // CURSO:
         // CURSO:
         // CURSO:
