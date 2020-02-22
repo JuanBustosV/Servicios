@@ -443,7 +443,14 @@ namespace Servicios
             return idproducto;
         }
 
-        // CURSO:
+        // CURSO: 63. Método para eliminar un registro de la base de datos - P1
+
+        //[WebMethod]
+        //public string HelloWorld()
+        //{
+        //    return "Hello World";
+        //}
+
         // CURSO:
         // CURSO:
         // CURSO:
