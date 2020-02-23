@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using System.Web.Services.Protocols;
 using System.Xml;
 
 namespace Servicios
@@ -498,13 +499,25 @@ namespace Servicios
             return result;
         }
 
-        // CURSO:
-
-        //[WebMethod]
-        //public string HelloWorld()
-        //{
-        //    return "Hello World";
-        //}
+        // CURSO: 67. Método con autenticación de cabecera - Header
+        public AuthUser User;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [WebMethod]
+        [SoapHeader("User")]
+        public string ObtenerFecha()
+        {
+            if (this.User != null && this.User.IsValid())
+            {
+                return DateTime.Now.Year.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Day.ToString();
+            }
+            else
+            {
+                return "Credenciales incorrectas";
+            }            
+        }
 
         // CURSO:
 
