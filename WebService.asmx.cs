@@ -458,6 +458,7 @@ namespace Servicios
         public string EliminarProducto(int idproducto)
         {
             string result = string.Empty;
+            SqlCommand com = null;
 
             if (!EnlaceSqlServer.ConectarSqlServer())
             {
@@ -466,6 +467,19 @@ namespace Servicios
 
             try
             {
+                // CURSO: 64. Método para eliminar un registro de la base de datos - P2
+                com = new SqlCommand("DELETE FROM productos WHERE idproducto = " + idproducto, EnlaceSqlServer.Conexion);
+
+                int eliminados = com.ExecuteNonQuery();
+
+                if (eliminados == 1)
+                {
+                    result = "EliminarProducto: Producto eliminado con éxito";
+                }
+                else
+                {
+                    result = "EliminarProducto: El producto no existe";
+                }
 
             }
             catch (Exception ex)
@@ -475,7 +489,10 @@ namespace Servicios
             }
             finally
             {
-
+                if (com != null)
+                {
+                    com.Dispose();
+                }
             }
 
             return result;
