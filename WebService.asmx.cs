@@ -264,10 +264,14 @@ namespace Servicios
             }
             finally
             {
-                record.Close();
-                record.Dispose();
-                //record = null;
-                com.Dispose();
+                if (record != null)
+                {
+                    record.Close();
+                    record.Dispose();
+                    //record = null;
+                }
+                if (com != null)
+                    com.Dispose();
             }
 
             return JsonConvert.SerializeObject(json);
@@ -445,6 +449,40 @@ namespace Servicios
 
         // CURSO: 63. Método para eliminar un registro de la base de datos - P1
 
+        /// <summary>
+        /// Elimina el producto seleccionado por id de la BD
+        /// </summary>
+        /// <param name="idproducto"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string EliminarProducto(int idproducto)
+        {
+            string result = string.Empty;
+
+            if (!EnlaceSqlServer.ConectarSqlServer())
+            {
+                return "";
+            }
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Funciones.Logs("EliminarProducto", ex.Message);
+                Funciones.Logs("EliminarProducto_DEBUG", ex.StackTrace);                
+            }
+            finally
+            {
+
+            }
+
+            return result;
+        }
+
+        // CURSO:
+
         //[WebMethod]
         //public string HelloWorld()
         //{
@@ -452,9 +490,29 @@ namespace Servicios
         //}
 
         // CURSO:
+
+        //[WebMethod]
+        //public string HelloWorld()
+        //{
+        //    return "Hello World";
+        //}
+
         // CURSO:
+
+        //[WebMethod]
+        //public string HelloWorld()
+        //{
+        //    return "Hello World";
+        //}
+
         // CURSO:
-        // CURSO:
+
+        //[WebMethod]
+        //public string HelloWorld()
+        //{
+        //    return "Hello World";
+        //}
+
         // CURSO:
         // CURSO:
         // CURSO:
