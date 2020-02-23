@@ -478,7 +478,7 @@ namespace Servicios
                 }
                 else
                 {
-                    result = "EliminarProducto: El producto no existe";
+                    result = "EliminarProducto: El producto con ID "+idproducto+" no existe";
                 }
 
             }
