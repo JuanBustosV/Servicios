@@ -500,7 +500,7 @@ namespace Servicios
         }
 
         // CURSO: 67. Método con autenticación de cabecera - Header
-        public AuthUser User;
+        public new AuthUser User;
         /// <summary>
         /// 
         /// </summary>
@@ -519,13 +519,16 @@ namespace Servicios
             }            
         }
 
-        // CURSO:
-
-        //[WebMethod]
-        //public string HelloWorld()
-        //{
-        //    return "Hello World";
-        //}
+        // CURSO: 69. Método con autenticación básica - Basic
+        /// <summary>
+        /// Devuelve la hora del servidor
+        /// </summary>
+        /// <returns></returns>
+        [WebMethod]
+        public string ObtenerHora()
+        {
+            return DateTime.Now.ToString("HH:mm:ss");
+        }
 
         // CURSO:
 
